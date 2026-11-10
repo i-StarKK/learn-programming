@@ -1,0 +1,326 @@
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ╔════════════════════════════════════════════════════════════════════════════╗
+  ║                                                                            ║
+  ║                          █   █ █████ █   █ █                               ║
+  ║                          █   █   █   ██ ██ █                               ║
+  ║                          █████   █   █ █ █ █                               ║
+  ║                          █   █   █   █   █ █                               ║
+  ║                          █   █   █   █   █ █████                           ║
+  ║                                                                            ║
+  ║                          LEVEL 2  ·  INTERMEDIATE                          ║
+  ║                              ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰                              ║
+  ╚════════════════════════════════════════════════════════════════════════════╝
+
+     ▌ HTML — دليل المتوسط
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ◆ لمين هذا الملف؟
+  لك إذا تعرف تبني صفحة بسيطة، وتبي صفحاتك تكون:
+  أسرع، وتظهر صح في قوقل والسوشال، ويستخدمها الكل (Accessibility).
+
+  ◆ وش بتتعلم؟
+    هيكل الصفحة الاحترافي، SEO و Open Graph
+    الصور المتجاوبة (picture, srcset)
+    Accessibility: aria و skip link و الكيبورد
+    عناصر جاهزة: dialog, details, template, datalist
+    data-attributes، تحسين التحميل (preload, defer, lazy)
+
+  الملف مربوط بـ ../../09-css/2-intermediate/style.css
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  هيكل الصفحة:
+
+  ┌──────────────────────────────────────────────┐
+  │  <header>    الشعار + <nav>                   │
+  ├──────────────────────────────────────────────┤
+  │  <main>                                       │
+  │   ┌───────────────────────┐  ┌─────────────┐ │
+  │   │  <article>            │  │  <aside>    │ │
+  │   │   <section>           │  │  محتوى      │ │
+  │   │   <section>           │  │  جانبي      │ │
+  │   └───────────────────────┘  └─────────────┘ │
+  ├──────────────────────────────────────────────┤
+  │  <footer>                                     │
+  └──────────────────────────────────────────────┘
+-->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ╭──────────────────────────────────────────────────────────────╮
+       │  ▸  SEO: كيف تطلع في قوقل
+       ╰──────────────────────────────────────────────────────────────╯ -->
+  <title>متجر التقنية | لابتوبات وإكسسوارات</title>
+  <meta name="description" content="أفضل اللابتوبات والإكسسوارات بأسعار منافسة وتوصيل سريع.">
+  <!-- canonical: يقول لقوقل وش الرابط الأصلي لو الصفحة لها أكثر من رابط -->
+  <link rel="canonical" href="https://example.com/products">
+
+  <!-- ╭──────────────────────────────────────────────────────────────╮
+       │  ▸  Open Graph: شكل الرابط لما ينرسل في واتساب وتويتر
+       ╰──────────────────────────────────────────────────────────────╯ -->
+  <!--
+     ┌─────────────────────────────┐
+     │  [ og:image  1200 × 630 ]   │
+     ├─────────────────────────────┤
+     │  og:title                   │
+     │  og:description             │
+     │  example.com                │
+     └─────────────────────────────┘
+  -->
+  <meta property="og:title" content="متجر التقنية">
+  <meta property="og:description" content="لابتوبات وإكسسوارات بأسعار منافسة">
+  <meta property="og:image" content="https://example.com/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- لون شريط المتصفح في الجوال -->
+  <meta name="theme-color" content="#1a73e8">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+
+  <!-- ╭──────────────────────────────────────────────────────────────╮
+       │  ▸  تحسين التحميل
+       ╰──────────────────────────────────────────────────────────────╯ -->
+  <!-- preconnect: افتح الاتصال بالسيرفر بدري -->
+  <link rel="preconnect" href="https://picsum.photos">
+  <link rel="stylesheet" href="../../09-css/2-intermediate/style.css">
+</head>
+
+<body>
+  <!-- ╭──────────────────────────────────────────────────────────────╮
+       │  ▸  Skip Link: اللي يستخدم الكيبورد يتخطى القائمة على طول
+       ╰──────────────────────────────────────────────────────────────╯ -->
+  <a class="skip-link" href="#main">تخطى إلى المحتوى</a>
+
+  <header class="site-header">
+    <a href="/" class="logo">🛒 متجر التقنية</a>
+
+    <!-- aria-label يفرق بين أكثر من nav في الصفحة لقارئ الشاشة -->
+    <nav aria-label="القائمة الرئيسية">
+      <ul class="nav-list">
+        <!-- aria-current: يقول لقارئ الشاشة "أنت هنا" -->
+        <li><a href="/" aria-current="page">الرئيسية</a></li>
+        <li><a href="/products">المنتجات</a></li>
+        <li><a href="/contact">تواصل</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- tabindex="-1" عشان الـ skip link يقدر يحط التركيز هنا -->
+  <main id="main" tabindex="-1" class="layout">
+
+    <article class="content">
+      <h1>المنتجات</h1>
+
+      <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           الصور المتجاوبة
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           المتصفح يختار من srcset حسب عرض الصورة على الشاشة (sizes) × دقة الشاشة:
+             شاشة صغيرة وعادية           ──► صغيرة  (أسرع وأقل باقة)
+             شاشة كبيرة أو عالية الدقة   ──► كبيرة  (أوضح)
+           (يعني جوال بشاشة دقتها عالية ممكن ياخذ الكبيرة)
+      -->
+      <picture>
+        <!-- AVIF و WebP أصغر بكثير من JPG، والمتصفح ياخذ أول نوع يدعمه
+             (تقدر تضيف قبلها <source type="image/avif"> لو عندك نسخة AVIF) -->
+        <source type="image/webp"
+                srcset="https://picsum.photos/id/0/480/270.webp 480w,
+                        https://picsum.photos/id/0/960/540.webp 960w"
+                sizes="(max-width: 768px) 100vw, 640px">
+        <!-- ⚠️ صورة الـ Hero (أول صورة تبان) لا تسوي لها lazy
+             fetchpriority="high" يحملها أول -->
+        <img src="https://picsum.photos/id/0/960/540"
+             alt="لابتوب مفتوح على مكتب خشبي"
+             width="960" height="540"
+             fetchpriority="high">
+      </picture>
+
+      <!-- ╭──────────────────────────────────────────────────────────────╮
+           │  ▸  data-attributes: تخزن بيانات في العنصر يقراها JavaScript
+           ╰──────────────────────────────────────────────────────────────╯ -->
+      <section aria-labelledby="products-title">
+        <h2 id="products-title">الأكثر مبيعًا</h2>
+
+        <ul class="product-grid" role="list">
+          <li class="product-card" data-id="1" data-price="3500">
+            <h3>لابتوب</h3>
+            <p class="price">3,500 ر.س</p>
+            <!-- aria-label يعطي الزر اسم أوضح من النص الظاهر ("أضف" لحالها ما تقول وش بيضيف)
+                 ⚠️ خل aria-label يبدأ بنفس النص الظاهر ("أضف...")، عشان اللي يستخدم الأوامر الصوتية يلقاه
+                 ⚠️ لو الزر أيقونة بس بدون نص، لازم تعطيه اسم (aria-label أو نص مخفي بـ .visually-hidden)
+                 وإلا قارئ الشاشة يقول "زر" وبس -->
+            <button type="button" class="btn" data-action="add-to-cart" aria-label="أضف اللابتوب للسلة">
+              🛒 أضف
+            </button>
+          </li>
+          <li class="product-card" data-id="2" data-price="75">
+            <h3>ماوس</h3>
+            <p class="price">75 ر.س</p>
+            <button type="button" class="btn" data-action="add-to-cart" aria-label="أضف الماوس للسلة">
+              🛒 أضف
+            </button>
+          </li>
+        </ul>
+
+        <!-- aria-live: قارئ الشاشة يقرأ أي تغيير هنا تلقائي -->
+        <p class="cart-status" aria-live="polite" id="cartStatus">السلة فاضية</p>
+      </section>
+
+      <!-- ╭──────────────────────────────────────────────────────────────╮
+           │  ▸  details / summary: أسئلة شائعة تنفتح وتنقفل بدون JavaScript
+           ╰──────────────────────────────────────────────────────────────╯ -->
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">أسئلة شائعة</h2>
+        <!-- name: لما تفتح وحدة تنقفل الباقي (Accordion) -->
+        <details name="faq">
+          <summary>كم يوم التوصيل؟</summary>
+          <p>من يومين إلى ثلاث أيام عمل.</p>
+        </details>
+        <details name="faq">
+          <summary>هل فيه استرجاع؟</summary>
+          <p>إيه، خلال 14 يوم من الاستلام.</p>
+        </details>
+      </section>
+
+      <!-- ╭──────────────────────────────────────────────────────────────╮
+           │  ▸  نموذج متقدم
+           ╰──────────────────────────────────────────────────────────────╯ -->
+      <section aria-labelledby="contact-title">
+        <h2 id="contact-title">تواصل معنا</h2>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="field">
+            <label for="phone">رقم الجوال</label>
+            <!-- pattern: صيغة محددة | inputmode: كيبورد أرقام في الجوال
+                 aria-describedby: يربط الحقل بنص المساعدة -->
+            <input id="phone" name="phone" type="tel"
+                   inputmode="numeric"
+                   pattern="05[0-9]{8}"
+                   placeholder="05xxxxxxxx"
+                   aria-describedby="phoneHint phoneError"
+                   autocomplete="tel"
+                   required>
+            <small id="phoneHint">يبدأ بـ 05 ومكون من 10 أرقام</small>
+            <small id="phoneError" class="error" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="city">المدينة</label>
+            <!-- datalist: اقتراحات وهو يكتب، ويقدر يكتب غيرها -->
+            <input id="city" name="city" list="cities" autocomplete="address-level2">
+            <datalist id="cities">
+              <option value="الرياض"></option>
+              <option value="جدة"></option>
+              <option value="الدمام"></option>
+            </datalist>
+          </div>
+
+          <div class="field">
+            <label for="date">تاريخ الزيارة</label>
+            <input id="date" name="date" type="date">
+          </div>
+
+          <button type="submit" class="btn">إرسال</button>
+        </form>
+      </section>
+
+      <button type="button" class="btn btn-outline" id="openDialog">عرض الشروط</button>
+    </article>
+
+    <!-- aside: محتوى جانبي مرتبط بس مو أساسي -->
+    <aside class="sidebar" aria-label="عروض">
+      <h2>عرض اليوم</h2>
+      <p>خصم 20% على الإكسسوارات.</p>
+    </aside>
+  </main>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       dialog: نافذة منبثقة جاهزة
+       لو فتحتها بـ showModal(): تقفل بـ Esc، وباقي الصفحة يتعطل، والتركيز يبقى داخلها تلقائي
+       (لو فتحتها بـ show() ما تسوي هذا)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <dialog id="termsDialog" aria-labelledby="dialogTitle">
+    <h2 id="dialogTitle">الشروط والأحكام</h2>
+    <p>باستخدامك للمتجر توافق على الشروط.</p>
+    <form method="dialog">
+      <button class="btn">تمام</button>
+    </form>
+  </dialog>
+
+  <!-- ╭──────────────────────────────────────────────────────────────╮
+       │  ▸  template: قالب HTML ما ينعرض، تنسخه بـ JavaScript
+       ╰──────────────────────────────────────────────────────────────╯ -->
+  <template id="toastTemplate">
+    <div class="toast" role="status"></div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 متجر التقنية</p>
+  </footer>
+
+  <!-- type="module" يتأجل تلقائي زي defer -->
+  <script type="module">
+    const dialog = document.getElementById("termsDialog");
+    document.getElementById("openDialog").addEventListener("click", () => dialog.showModal());
+
+    // Event Delegation: مستمع واحد للأب بدل مستمع لكل زر
+    //
+    //   ul.product-grid  ◄── مستمع واحد هنا
+    //    ├── button
+    //    ├── button        الضغطة "تطلع" (bubble) للأب
+    //    └── button
+    let count = 0;
+    const status = document.getElementById("cartStatus");
+    document.querySelector(".product-grid").addEventListener("click", (event) => {
+      const button = event.target.closest('[data-action="add-to-cart"]');
+      if (!button) return;
+
+      const card = button.closest(".product-card");
+      count += 1;
+      status.textContent = `في السلة ${count} منتج (آخر واحد رقم ${card.dataset.id})`;
+      showToast("انضاف للسلة ✅");
+    });
+
+    function showToast(message) {
+      const node = document.getElementById("toastTemplate").content.firstElementChild.cloneNode(true);
+      document.body.append(node);
+      // ⚠️ نحط النص بعد ما ينضاف العنصر، عشان قارئ الشاشة يحس بالتغيير ويقراه
+      requestAnimationFrame(() => {
+        node.textContent = message;
+      });
+      setTimeout(() => node.remove(), 2000);
+    }
+
+    const form = document.getElementById("contactForm");
+    const phone = document.getElementById("phone");
+    const phoneError = document.getElementById("phoneError");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const valid = phone.checkValidity();
+      phone.setAttribute("aria-invalid", String(!valid));
+      phoneError.textContent = valid ? "" : "رقم الجوال غير صحيح";
+      if (valid) showToast("تم الإرسال");
+    });
+  </script>
+</body>
+</html>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ┃  ⚠️  أغلاط المستوى المتوسط
+
+  1. ما فيه meta description و Open Graph   -> الرابط يطلع شين في السوشال
+  2. lazy على أول صورة تبان                -> الصفحة تبان أبطأ
+  3. صور JPG كبيرة للجوال                   -> picture + srcset + webp
+  4. زر بأيقونة بدون aria-label
+  5. تحديثات في الصفحة ما يحس فيها قارئ الشاشة -> aria-live
+  6. نافذة منبثقة مصنوعة بـ div              -> استخدم <dialog>
+  7. مستمع لكل عنصر في قائمة كبيرة         -> Event Delegation
+  8. تحط aria على كل شيء                    -> HTML الصحيح أول، aria لما تحتاج بس
+  9. tabindex بأرقام موجبة (1, 2, 3)         -> يخرب ترتيب التنقل
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->

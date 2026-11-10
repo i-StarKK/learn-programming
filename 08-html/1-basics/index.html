@@ -1,0 +1,260 @@
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ╔════════════════════════════════════════════════════════════════════════════╗
+  ║                                                                            ║
+  ║                          █   █ █████ █   █ █                               ║
+  ║                          █   █   █   ██ ██ █                               ║
+  ║                          █████   █   █ █ █ █                               ║
+  ║                          █   █   █   █   █ █                               ║
+  ║                          █   █   █   █   █ █████                           ║
+  ║                                                                            ║
+  ║                             LEVEL 1  ·  BASICS                             ║
+  ║                              ▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱                              ║
+  ╚════════════════════════════════════════════════════════════════════════════╝
+
+     ▌ HTML — دليل المبتدئ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ◆ وش هي؟
+  مو لغة برمجة، هي "لغة ترميز": تحدد هيكل الصفحة ومحتواها.
+    HTML       = الهيكل العظمي (وش موجود في الصفحة)
+    CSS        = الشكل (الألوان والترتيب)
+    JavaScript = الحركة والتفاعل
+
+  ◆ كيف تشغل الملف؟
+    افتحه بالمتصفح مباشرة (دبل كلك)
+    أو في VS Code ثبت إضافة Live Server
+
+  ◆ أهم شيء تعرفه:
+    - كل عنصر له وسم بداية <p> ونهاية </p>
+    - بعض العناصر ما لها نهاية مثل <img> و <input>
+    - استخدم العناصر اللي لها معنى (header, nav, main ...) مو div لكل شيء
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+<!-- ⚠️ لا تنساه: يقول للمتصفح إن هذي HTML5 -->
+<!DOCTYPE html>
+
+<!-- lang="ar" dir="rtl": الصفحة عربية ومن اليمين لليسار -->
+<html lang="ar" dir="rtl">
+
+<!-- head: معلومات عن الصفحة، ما تنعرض للمستخدم -->
+<head>
+  <!-- ⚠️ بدونها العربي يطلع رموز غريبة -->
+  <meta charset="UTF-8">
+
+  <!-- ⚠️ بدونها الموقع يطلع صغير ومخربط في الجوال -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- وصف ممكن قوقل يعرضه في نتايج البحث (مو مضمون، أحيانًا يكتب وصف من عنده) -->
+  <meta name="description" content="Learning HTML basics">
+
+  <!-- العنوان اللي يطلع في التاب -->
+  <title>دليل HTML</title>
+
+  <!-- ربط ملف CSS -->
+  <link rel="stylesheet" href="../../09-css/1-basics/style.css">
+</head>
+
+<!-- body: كل اللي يشوفه المستخدم -->
+<body>
+
+  <!-- header: رأس الصفحة -->
+  <header class="site-header">
+    <!-- nav: قائمة التنقل -->
+    <nav>
+      <a href="#basics">الأساسيات</a>
+      <a href="#forms">النماذج</a>
+      <a href="#tables">الجداول</a>
+    </nav>
+  </header>
+
+  <!-- main: المحتوى الأساسي، واحد بس في الصفحة -->
+  <main class="container">
+
+    <!-- ⚠️ الأفضل h1 واحد للعنوان الرئيسي، وبعده h2 ثم h3 بالترتيب، لا تتنط -->
+    <h1>أساسيات HTML</h1>
+
+    <!-- section: قسم له عنوان -->
+    <section id="basics">
+      <h2>النصوص</h2>
+
+      <!-- p: فقرة -->
+      <p>
+        هذي فقرة فيها كلام <strong>مهم</strong> وكلام <em>مميز</em>.
+      </p>
+
+      <!-- br: سطر جديد (لا تستخدمها للمسافات، المسافات شغل CSS) -->
+      <p>سطر أول<br>سطر ثاني</p>
+
+      <!-- القوائم: ul بدون أرقام، ol بأرقام، li = عنصر -->
+      <ul>
+        <li>عنصر أول</li>
+        <li>عنصر ثاني</li>
+      </ul>
+
+      <ol>
+        <li>الخطوة الأولى</li>
+        <li>الخطوة الثانية</li>
+      </ol>
+
+      <!-- الروابط -->
+      <a href="https://developer.mozilla.org">رابط في نفس التاب</a>
+
+      <!-- target="_blank": المتصفحات الحديثة تحط له noopener تلقائي (حماية)،
+           بس كتابة rel="noopener" ما تضر وتحمي المتصفحات القديمة
+           noreferrer تحطه لو ما تبي الموقع الثاني يعرف إنك جيت منه -->
+      <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">
+        رابط في تاب جديد
+      </a>
+
+      <!-- الصور
+           ⚠️ alt إجباري: يوصف الصورة للمكفوفين ولقوقل ولو الصورة ما حملت
+           width و height يمنعون الصفحة "تنط" وقت التحميل
+           loading="lazy" يأجل تحميل الصورة لين تقرب منها وأنت تنزل -->
+      <img
+        src="https://picsum.photos/400/250"
+        alt="صورة تجريبية لمنظر طبيعي"
+        width="400"
+        height="250"
+        loading="lazy"
+      >
+
+      <!-- figure: صورة مع وصف تحتها -->
+      <figure>
+        <img src="https://picsum.photos/300/200" alt="صورة مدينة" width="300" height="200" loading="lazy">
+        <figcaption>وصف الصورة</figcaption>
+      </figure>
+    </section>
+
+    <!-- article: محتوى مستقل (مقال، منشور، بطاقة منتج) -->
+    <article class="card">
+      <h2>مقال قصير</h2>
+      <p>كل مقال يقدر يكون له عنوانه ومحتواه الخاص.</p>
+    </article>
+
+    <!-- ╭──────────────────────────────────────────────────────────────╮
+         │  ▸  النماذج (Forms)
+         ╰──────────────────────────────────────────────────────────────╯ -->
+    <section id="forms">
+      <h2>النماذج</h2>
+
+      <!-- action: وين تنرسل البيانات، method: الطريقة
+           get يحط البيانات في الرابط، فتنحفظ في السجل (History) وفي logs السيرفر
+           ⚠️ للبيانات الحساسة (كلمات مرور) استخدم post
+           ⚠️ post مو تشفير! لازم الموقع يكون HTTPS عشان البيانات تنحمي -->
+      <form action="/register" method="post">
+
+        <!-- ⚠️ كل input لازم يكون له label
+             for في الـ label = id في الـ input -->
+        <label for="fullName">الاسم</label>
+        <input type="text" id="fullName" name="fullName" required minlength="2">
+
+        <!-- type="email" يتحقق إن الصيغة إيميل ويطلع كيبورد مناسب في الجوال -->
+        <label for="email">الإيميل</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
+
+        <label for="age">العمر</label>
+        <input type="number" id="age" name="age" min="1" max="120">
+
+        <label for="city">المدينة</label>
+        <select id="city" name="city">
+          <option value="">اختر مدينة</option>
+          <option value="riyadh">الرياض</option>
+          <option value="jeddah">جدة</option>
+          <option value="dammam">الدمام</option>
+        </select>
+
+        <label for="bio">نبذة</label>
+        <textarea id="bio" name="bio" rows="4"></textarea>
+
+        <!-- radio: تختار واحد بس (نفس الـ name) -->
+        <fieldset>
+          <legend>الجنس</legend>
+          <label><input type="radio" name="gender" value="male"> ذكر</label>
+          <label><input type="radio" name="gender" value="female"> أنثى</label>
+        </fieldset>
+
+        <!-- checkbox: تختار أكثر من واحد -->
+        <label>
+          <input type="checkbox" name="terms" required>
+          أوافق على الشروط
+        </label>
+
+        <!-- ⚠️ استخدم button للأزرار مو div
+             button يشتغل بالكيبورد ويفهمه قارئ الشاشة تلقائي -->
+        <button type="submit">تسجيل</button>
+      </form>
+
+      <!-- ⚠️ required و minlength للراحة بس
+           أي أحد يقدر يشيلها من المتصفح، فالتحقق الحقيقي لازم في السيرفر -->
+    </section>
+
+    <!-- ╭──────────────────────────────────────────────────────────────╮
+         │  ▸  الجداول: للبيانات الجدولية بس، مو لترتيب الصفحة
+         ╰──────────────────────────────────────────────────────────────╯ -->
+    <section id="tables">
+      <h2>الجداول</h2>
+      <table>
+        <caption>درجات الطلاب</caption>
+        <thead>
+          <tr>
+            <th scope="col">الاسم</th>
+            <th scope="col">الدرجة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>علي</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td>سارة</td>
+            <td>95</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- مكان نعرض فيه نتيجة الزر من JavaScript -->
+    <section>
+      <h2>تجربة JavaScript</h2>
+      <!-- ⚠️ id لازم يكون فريد في الصفحة كلها، class يتكرر عادي -->
+      <button type="button" id="myButton" class="button">اضغطني</button>
+      <p id="output"></p>
+    </section>
+  </main>
+
+  <!-- footer: ذيل الصفحة -->
+  <footer class="site-footer">
+    <p>&copy; 2026 - جميع الحقوق محفوظة</p>
+  </footer>
+
+  <!-- ربط JavaScript
+       defer: السكربت ينزل بالتوازي مع الصفحة، وينفذ بعد ما تنبني، فما يبطئها
+       ⚠️ بدون defer والسكربت في head، ما بيلقى العناصر لأنها لسا ما انبنت -->
+  <script src="../../07-javascript/1-basics/main.js" defer></script>
+</body>
+</html>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ┃  ⚠️  ملخص الأغلاط اللي لازم ما تطيح فيها
+
+  1. تنسى <!DOCTYPE html> و <meta charset="UTF-8">
+  2. تنسى <meta name="viewport">       -> الجوال يخرب
+  3. صور بدون alt
+  4. div لكل شيء                        -> header, nav, main, section, article, footer
+  5. زر بـ <div onclick>                -> استخدم <button>
+  6. تكثر h1 بدون داعي أو تتنط بين مستويات العناوين
+  7. input بدون label
+  8. id مكرر في نفس الصفحة
+  9. target="_blank" بدون rel="noopener"  -> المتصفحات القديمة ما تحميك
+  10. تحسب required حماية              -> التحقق الحقيقي في السيرفر
+  11. method="get" للبيانات الحساسة   -> استخدم post، ومعه HTTPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
